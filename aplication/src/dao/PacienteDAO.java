@@ -119,5 +119,38 @@ public class PacienteDAO {
         return false;
     }
 
+    public ArrayList<Paciente> buscarPorApellido(String apellido) {
+
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+
+        String sql = "SELECT * FROM pacientes WHERE apellido LIKE ?";
+
+        try {
+            Connection con = ConexionBD.conectar();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, "%" + apellido + "%");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Paciente paciente = new Paciente(
+                               rs.getInt("id_paciente"),
+                                rs.getString("nombre"),
+                                rs.getString("apellido"),
+                                rs.getString("telefono"),
+                                rs.getString("email"),
+                                rs.getString("direccion"));
+                pacientes.add(paciente);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pacientes;
+    }
+
 
 }

@@ -1,0 +1,10 @@
+# IntelliJ
+.idea/
+
+# Archivos compilados
+out/
+*.class
+
+# Videos
+VIDEO DEL PROYECTO/
+*.mp4

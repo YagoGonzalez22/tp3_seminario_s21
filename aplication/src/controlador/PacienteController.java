@@ -29,4 +29,8 @@ public class PacienteController {
     public boolean eliminarPaciente(int id) {
         return pacienteDAO.eliminarPaciente(id);
     }
+
+    public ArrayList<Paciente> buscarPorApellido(String apellido) {
+        return pacienteDAO.buscarPorApellido(apellido);
+    }
 }

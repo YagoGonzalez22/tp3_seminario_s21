@@ -126,4 +126,67 @@ public class TurnoDAO {
 
         return turnos;
     }
+
+    public Turno buscarTurno(int idTurno) {
+
+        String sql =
+                "SELECT * " +
+                        "FROM turnos t " +
+                        "INNER JOIN pacientes p ON t.id_paciente = p.id_paciente " +
+                        "INNER JOIN medicos m ON t.id_medico = m.id_medico " +
+                        "WHERE t.id_turno = ?";
+
+        try {
+
+            Connection con =
+                    ConexionBD.conectar();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql);
+
+            ps.setInt(1, idTurno);
+
+            ResultSet rs =
+                    ps.executeQuery();
+
+            if(rs.next()) {
+
+                Paciente paciente =
+                        new Paciente(
+                                rs.getInt("id_paciente"),
+                                rs.getString("nombre"),
+                                rs.getString("apellido"),
+                                rs.getString("telefono"),
+                                rs.getString("email"),
+                                rs.getString("direccion")
+                        );
+
+                Medico medico =
+                        new Medico(
+                                rs.getInt("id_medico"),
+                                rs.getString("m.nombre"),
+                                rs.getString("m.apellido"),
+                                rs.getString("m.telefono"),
+                                rs.getString("m.email"),
+                                rs.getString("especialidad")
+                        );
+
+                return new Turno(
+                        rs.getInt("id_turno"),
+                        paciente,
+                        medico,
+                        rs.getDate("fecha").toLocalDate(),
+                        rs.getTime("hora").toLocalTime(),
+                        rs.getString("estado")
+                );
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+        return null;
+    }
 }

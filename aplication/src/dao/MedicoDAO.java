@@ -108,4 +108,45 @@ public class MedicoDAO {
 
         return false;
     }
+
+    public ArrayList<Medico> buscarPorApellido(String apellido) {
+
+        ArrayList<Medico> medicos = new ArrayList<>();
+
+        String sql =
+                "SELECT * FROM medicos WHERE apellido LIKE ?";
+
+        try {
+
+            Connection con = ConexionBD.conectar();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql);
+
+            ps.setString(1, "%" + apellido + "%");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Medico medico =
+                        new Medico(
+                                rs.getInt("id_medico"),
+                                rs.getString("nombre"),
+                                rs.getString("apellido"),
+                                rs.getString("telefono"),
+                                rs.getString("email"),
+                                rs.getString("especialidad")
+                        );
+
+                medicos.add(medico);
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        return medicos;
+    }
 }

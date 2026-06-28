@@ -8,6 +8,8 @@ import modelo.Usuario;
 import Vista.*;
 
 public class Main {
+    //YAGO GONZALEZ
+    //VINF015158
 
     public static void main(String[] args) {
 
@@ -23,20 +25,12 @@ public class Main {
         TurnoController turnoController = new TurnoController();
         //declaramos la vistas desde usuario controler donde determinamos un usuario como administrador
         // user: admin pass: 1234
-        VistaLogin login = new VistaLogin(usuarioController);
-        //llamamos iniciar sesion para que la persona se logee
-        Usuario usuarioLogueado = login.iniciarSesion();
-         //verificacion del login
-        if (usuarioLogueado != null) {
-            //login
-            MenuPrincipal menu =
-                    new MenuPrincipal(usuarioLogueado, pacienteController, medicoController, turnoController);
-            menu.iniciar();
-        } else {
-            System.out.println(
-                    "Acceso denegado."
-            );
-        }
+        UsuarioController UsuarioController = new UsuarioController();
+
+        new VistaLogin(usuarioController );
+
+
+
 
     }
 }

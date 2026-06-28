@@ -34,4 +34,8 @@ public class TurnoController {
 
     }
 
+    public Turno buscarTurno(int id) {
+        return turnoDAO.buscarTurno(id);
+    }
+
 }

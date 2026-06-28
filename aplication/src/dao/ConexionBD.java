@@ -14,7 +14,6 @@ public class ConexionBD {
             String url = "jdbc:mysql://localhost:3306/turnos_medicos";
             String usuario = "root"; //usuario
             String password = "135792468"; //password
-
             // conexión
             return DriverManager.getConnection(url, usuario, password);
           //excepcion captura en caso de no tener el archivo jar

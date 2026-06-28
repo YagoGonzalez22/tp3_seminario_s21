@@ -29,4 +29,8 @@ public class MedicoController {
     public boolean eliminarMedico(int id) {
         return medicoDAO.eliminarMedico(id);
     }
+
+    public ArrayList<Medico> buscarPorApellido(String apellido) {
+        return medicoDAO.buscarPorApellido(apellido);
+    }
 }
